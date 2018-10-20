@@ -4,6 +4,7 @@
 }
 
 %{
+char buffer[90];
 
 %}
 
@@ -41,7 +42,7 @@ fin						return FIN;
 {Digito}+					{yylval = strdup(yytext); return CONSTANTE;}
 {Espacio}+					/* ignorar espacios */
 "//"(.*)\n					/* ignorar comentarios */	
-{Digito}+{Letra}+{Alfanumerico}* 		{yylexerrs++; yyerror("Constante inválida:");}
-{Otro}+						{yylexerrs++; yyerror("Cadena inválida:");}
-{Letra}({Alfanumerico}|{Otro})+			{yylexerrs++; yyerror("Identificador inválido:");}
-.						{yylexerrs++; yyerror("Caracter no definido:");}
+{Digito}+{Letra}+{Alfanumerico}* 		{yylexerrs++; strcpy(buffer,"Constante inválida: "); strcat(buffer, yytext), yyerror(buffer);}
+{Otro}+						{yylexerrs++; strcpy(buffer,"Cadena inválida: "); strcat(buffer, yytext), yyerror(buffer);}
+{Letra}({Alfanumerico}|{Otro})+			{yylexerrs++; strcpy(buffer,"Identificador inválido: "); strcat(buffer, yytext), yyerror(buffer);}
+.						{yylexerrs++; strcpy(buffer,"Caracter no definido: "); strcat(buffer, yytext), yyerror(buffer);}
