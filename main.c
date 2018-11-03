@@ -18,7 +18,6 @@ Integrantes:
 # include "scanner.h"
 
 int yylexerrs = 0;
-int yynerrs = 0;
 
 int main () {
 	

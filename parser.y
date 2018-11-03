@@ -23,7 +23,7 @@ extern int yynerrs;
 %precedence NEG
 
 %% 
-todo			: programa { if (yynerrs || yylexerrs) YYABORT;}
+todo			: programa { if (yynerrs || yylexerrs) YYABORT; else YYACCEPT;}
 			;
 programa             	: PROGRAMA VARIABLES variable CODIGO codigo FIN
                      	;
